@@ -27,9 +27,16 @@ const createUser = async (pk_user, name) => {
     }
 }
 
-
+const updateUser = async (pk_user, name, status) => {
+    try {
+        return usersModel.updateUser(pk_user, name, status)
+    } catch (e) {
+        throw new Error(e.message)
+    }
+}
 
 module.exports = {
     getUser,
-    createUser
+    createUser,
+    updateUser
 }
