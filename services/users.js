@@ -35,8 +35,17 @@ const updateUser = async (pk_user, name, status) => {
     }
 }
 
+const deleteUser = async (pk_user) => {
+    try {
+        return usersModel.deleteUser(pk_user)
+    } catch (e) {
+        throw new Error(e.message)
+    }
+}
+
 module.exports = {
     getUser,
     createUser,
-    updateUser
+    updateUser,
+    deleteUser
 }
