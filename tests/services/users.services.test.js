@@ -19,4 +19,10 @@ describe('users main functions', () => {
         expect(user.pk_user).toBe(123);
         expect(user.status).toBe(false);
     });
+
+    // deleteUser function test
+    test('deleteUser with {pk_user: 123}', async () => {
+        let user = await users.deleteUser(123)
+        expect(user.pk_user).toBe(123);
+    });
 })
