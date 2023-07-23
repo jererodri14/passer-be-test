@@ -27,6 +27,13 @@ const createUser = async (pk_user, name) => {
     }
 }
 
+/** 
+ * Update an especific user
+ * @param {number} pk_user User id
+ * @param {string} name User name
+ * @param {boolean} status User status
+ * @returns {{pk_user: 1, name: "Juan" , status: true}}
+ */
 const updateUser = async (pk_user, name, status) => {
     try {
         return usersModel.updateUser(pk_user, name, status)
@@ -35,6 +42,11 @@ const updateUser = async (pk_user, name, status) => {
     }
 }
 
+/**
+ * Delete an especific user
+ * @param {number} pk_user User id
+ * @returns {pk_user: 1} User primary key
+ * */
 const deleteUser = async (pk_user) => {
     try {
         return usersModel.deleteUser(pk_user)
