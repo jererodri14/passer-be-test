@@ -1,4 +1,4 @@
-const { postgresql } = require('../databases/postgresql')
+const { postgresql } = require('../databases/postgresql');
 
 /**
  * Create a transaction
@@ -18,6 +18,21 @@ const createTransaction = async (pk_transaction, fk_user, description, amount) =
     }
 }
 
+/**
+ * Get an especific transaction
+ * @param {number} pk_transaction Transaction id
+ * @returns {{pk_transaction: 1, fk_user: 1, description: "Compra de comida", amount: 10000}}
+ */
+const getTransaction = async (pk_transaction) => {
+    try {
+        let transaction = await postgresql.public.one(`select * from transaction where pk_transaction = ${pk_transaction}`);
+        return transaction
+    } catch (e) {
+        throw new Error(e)
+    }
+}
+
  module.exports = {
-        createTransaction
+        createTransaction,
+        getTransaction
  }
