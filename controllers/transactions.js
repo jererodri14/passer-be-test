@@ -1,4 +1,5 @@
 const transactions = require('../services/transactions')
+const querystring = require('querystring');
 
 const createTransaction = async (req, res, next) => {
     const { pk_transaction, fk_user, description, amount } = req.body
@@ -37,8 +38,21 @@ const updateTransaction = async (req, res, next) => {
     }
 }
 
+const getTransactionsByUser = async (req, res, next) => {
+    const { fk_user } = req.query
+    try {
+        let transactionsByUser = await transactions.getTransactionsByUser(fk_user)
+        res.status(200).send(transactionsByUser)
+        next()
+    } catch (e) {
+        console.log(e.message)
+        res.sendStatus(500) && next(e)
+    }
+}
+
 module.exports = {
     createTransaction,
     getTransaction,
-    updateTransaction
+    updateTransaction,
+    getTransactionsByUser
 }

@@ -49,8 +49,24 @@ const updateTransaction = async (pk_transaction, fk_user, description, amount) =
     }
 }
 
+/**
+ *  Get transactions by user
+ * @param {number} fk_user User id
+ * @returns {{{pk_transaction: 1, fk_user: 1, description: "Compra de comida", amount: 10000}, 
+ * {pk_transaction: 2, fk_user: 1, description: "Compra de ropa", amount: 20000}}}
+ */
+const getTransactionsByUser = async (fk_user) => {
+    try {
+        let transactions = await postgresql.public.many(`select * from transaction where fk_user = ${fk_user}`);
+        return transactions
+    } catch (e) {
+        throw new Error(e)
+    }
+}
+
  module.exports = {
         createTransaction,
         getTransaction,
-        updateTransaction
+        updateTransaction,
+        getTransactionsByUser
  }
